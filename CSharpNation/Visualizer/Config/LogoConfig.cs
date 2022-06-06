@@ -12,11 +12,14 @@ namespace CSharpNation.Visualizer.Config
         public static void Initialize()
         {
             TexturePath = @"C:\ProgramData\CSharpNationV2.0\Resources\Logo.png";
+            BlurSigma = 1f;
 
             Logo = new Logo(TexturePath);
+            Logo.BlurSigma = BlurSigma;
         }
 
         public static string TexturePath { get; set; }
+        public static float BlurSigma { get; set; }
 
         public static Logo Logo { get; private set; }
     }

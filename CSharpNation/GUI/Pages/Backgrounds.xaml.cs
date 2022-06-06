@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace CSharpNation.GUI.Pages
         public Backgrounds()
         {
             InitializeComponent();
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BackgroundsConfig.Backgrounds.Next();
+        }
+
+        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BackgroundsConfig.Backgrounds.Previous();
         }
     }
 }

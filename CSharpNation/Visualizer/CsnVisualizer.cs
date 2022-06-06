@@ -2,6 +2,7 @@
 using CSharpNation.Visualizer.Particles;
 using CSharpNation.Visualizer.Textures;
 using CSharpNation.Visualizer.Waves;
+using CSharpNation.Visualizer.Config;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -17,7 +18,8 @@ namespace CSharpNation.Visualizer
     {
         internal CsnVisualizer(int width, int height, string title) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 8), title)
         {
-            CsnConfig.Initialize();
+            //CsnConfig.Initialize();
+            ConfigInit.Initialize();
 
             Waves = new List<Wave>
             {
@@ -32,14 +34,14 @@ namespace CSharpNation.Visualizer
                 new Wave(0, 255, 0)
             };
 
-            Analyzer = CsnConfig.Analyzer;
+            Analyzer = AnalyzerConfig.SpectrumAnalyzer;
             Analyzer.multiplier = height / 3;
 
-            Logo = CsnConfig.Logo;
+            Logo = LogoConfig.Logo;
             Logo.LoadTexture();
             Logo.Size = height / 2;
 
-            Backgrounds = CsnConfig.BackgroundConfig.Backgrounds;
+            Backgrounds = BackgroundsConfig.Backgrounds;
             Backgrounds.LoadTextures();
 
             random = new Random();
@@ -157,7 +159,7 @@ namespace CSharpNation.Visualizer
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            int opacity = (int)(CsnConfig.BackgroundConfig.Opacity / 100.0f * 255);
+            int opacity = (int)(BackgroundsConfig.Opacity / 100.0f * 255);
 
             Backgrounds.DrawBackground(0, 0, Width, Height, 255, opacity, opacity, opacity, Power / 2);
 

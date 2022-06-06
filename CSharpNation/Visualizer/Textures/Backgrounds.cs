@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace CSharpNation.Visualizer.Textures
             {
                 Textures[i + jpgFiles.Length] = new Texture(pngFiles[i]);
             }
+
+            Debug.WriteLine("Loaded {0} backgrounds", Textures.Length);
         }
 
         public void LoadTextures()

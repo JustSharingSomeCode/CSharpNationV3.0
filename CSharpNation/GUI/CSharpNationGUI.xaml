@@ -111,10 +111,12 @@
         <Grid Grid.Row="2"
               Height="40"
               Margin="5,0,5,0">
-            <wpfui:Button HorizontalAlignment="Right"
+            <wpfui:Button x:Name="StartVisualizerBtn"
+                          HorizontalAlignment="Right"
                           Icon="WindowPlay20"
                           Content="Start visualizer"
-                          Width="200" />
+                          Width="200" 
+                          Click="StartVisualizerBtn_Click"/>
         </Grid>
     </Grid>
 </Window>

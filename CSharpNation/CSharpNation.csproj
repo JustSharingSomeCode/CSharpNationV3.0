@@ -96,6 +96,7 @@
     <Compile Include="Visualizer\Config\ParticlesConfig.cs" />
     <Compile Include="Visualizer\Config\WavesConfig.cs" />
     <Compile Include="Visualizer\CsnVisualizer.cs" />
+    <Compile Include="Visualizer\CsnVisualizerThread.cs" />
     <Compile Include="Visualizer\Particles\Particle.cs" />
     <Compile Include="Visualizer\Particles\ParticlesController.cs" />
     <Compile Include="Visualizer\Textures\Backgrounds.cs" />

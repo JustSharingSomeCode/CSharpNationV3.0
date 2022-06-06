@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -108,7 +109,9 @@ namespace CSharpNation.Visualizer.Textures
             catch (Exception ex)
             {
                 LoadFailed = true;
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
+                Debug.WriteLine("Failed loading texture at: {0}", Path);
+                Debug.WriteLine(ex.ToString());
             }
         }
 

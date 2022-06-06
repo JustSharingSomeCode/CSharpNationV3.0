@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using CSharpNation.Visualizer;
+using CSharpNation.Visualizer.Config;
+
 namespace CSharpNation.GUI
 {
     /// <summary>
@@ -23,13 +26,19 @@ namespace CSharpNation.GUI
         {
             InitializeComponent();
             InitializeUi();
+
+            CsnVisualizerThread = new CsnVisualizerThread();
         }
+
+        private CsnVisualizerThread CsnVisualizerThread;
 
         private void InitializeUi()
         {
             Loaded += (sender, args) =>
             {                
                 WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Mica, true, true);
+
+                ConfigInit.Initialize();
             };
         }
 
@@ -49,6 +58,11 @@ namespace CSharpNation.GUI
         private void RootNavigation_Navigated(WPFUI.Controls.Interfaces.INavigation sender, WPFUI.Common.RoutedNavigationEventArgs e)
         {
 
+        }        
+
+        private void StartVisualizerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CsnVisualizerThread.StartVisualizer();
         }
     }
 }

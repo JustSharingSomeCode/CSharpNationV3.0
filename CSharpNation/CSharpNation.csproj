@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>.\Bass.Net.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK, Version=3.3.2.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.3.2\lib\net20\OpenTK.dll</HintPath>
     </Reference>
@@ -46,6 +49,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -84,6 +88,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Visualizer\Analyzer\SpectrumAnalyzer.cs" />
+    <Compile Include="Visualizer\Config\AnalyzerConfig.cs" />
+    <Compile Include="Visualizer\Config\BackgroundsConfig.cs" />
+    <Compile Include="Visualizer\Config\ConfigInit.cs" />
+    <Compile Include="Visualizer\Config\LogoConfig.cs" />
+    <Compile Include="Visualizer\Config\ParticlesConfig.cs" />
+    <Compile Include="Visualizer\Config\WavesConfig.cs" />
+    <Compile Include="Visualizer\CsnVisualizer.cs" />
+    <Compile Include="Visualizer\Particles\Particle.cs" />
+    <Compile Include="Visualizer\Particles\ParticlesController.cs" />
+    <Compile Include="Visualizer\Textures\Backgrounds.cs" />
+    <Compile Include="Visualizer\Textures\Logo.cs" />
+    <Compile Include="Visualizer\Textures\Texture.cs" />
+    <Compile Include="Visualizer\Waves\Wave.cs" />
+    <Compile Include="Visualizer\Waves\WaveTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\CSharpNationGUI.xaml.cs">
@@ -131,10 +150,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Visualizer\Analyzer\" />
-    <Folder Include="Visualizer\Config\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="GUI\CSharpNationGUI.xaml">
       <SubType>Designer</SubType>
@@ -160,6 +176,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="bass.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bass.Net.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="basswasapi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -35,8 +35,9 @@ namespace CSharpNation.GUI
         private void InitializeUi()
         {
             Loaded += (sender, args) =>
-            {                
-                WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Mica, true, true);
+            {
+                //WPFUI.Appearance.Watcher.Watch(this, WPFUI.Appearance.BackgroundType.Mica, true, true);
+                ChangeTheme_Click(null, null);
 
                 ConfigInit.Initialize();
             };

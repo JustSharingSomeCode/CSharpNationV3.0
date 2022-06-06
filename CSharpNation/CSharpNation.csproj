@@ -88,6 +88,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GUI\Controls\TextureDetails.xaml.cs">
+      <DependentUpon>TextureDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Visualizer\Analyzer\SpectrumAnalyzer.cs" />
     <Compile Include="Visualizer\Config\AnalyzerConfig.cs" />
     <Compile Include="Visualizer\Config\BackgroundsConfig.cs" />
@@ -153,6 +156,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="GUI\Controls\TextureDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\CSharpNationGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

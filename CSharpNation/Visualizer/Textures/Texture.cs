@@ -29,6 +29,13 @@ namespace CSharpNation.Visualizer.Textures
         }
 
         public string Path { get; set; }
+        public string Name
+        {
+            get
+            {
+                return Path.Split('\\').Last();
+            }
+        }
         public int TextureHandle { get; set; }
         public float BlurSigma { get; set; }
 

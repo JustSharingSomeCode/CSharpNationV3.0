@@ -1,4 +1,5 @@
 ﻿using CSharpNation.Visualizer.Config;
+using CSharpNation.Visualizer.Textures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,9 @@ namespace CSharpNation.GUI.Pages
         public Backgrounds()
         {
             InitializeComponent();
-        }
+
+            UpdateBackgroundsList();
+        }        
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -34,6 +37,27 @@ namespace CSharpNation.GUI.Pages
         private void PreviousBtn_Click(object sender, RoutedEventArgs e)
         {
             BackgroundsConfig.Backgrounds.Previous();
+        }       
+        
+        private void UpdateBackgroundsList()
+        {
+            TextureDetails.Texture = null;
+            BackgroundsList.Items.Clear();
+
+            Texture[] textures = BackgroundsConfig.Backgrounds.Textures;
+
+            for(int i = 0; i < textures.Length; i++)
+            {
+                BackgroundsList.Items.Add(textures[i].Path);
+            }
+        }        
+
+        private void BackgroundsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(BackgroundsList.SelectedIndex >= 0 && BackgroundsList.SelectedIndex < BackgroundsConfig.Backgrounds.Textures.Length)
+            {
+                TextureDetails.Texture = BackgroundsConfig.Backgrounds.Textures[BackgroundsList.SelectedIndex];
+            }            
         }
     }
 }

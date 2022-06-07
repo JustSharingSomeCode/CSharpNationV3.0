@@ -9,47 +9,70 @@
              d:DesignHeight="450"
              d:DesignWidth="400">
     <Grid>
-        <Grid x:Name="NothingSelectedGrid" d:Visibility="Hidden">
-            <Label Content="Nothing selected..." FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid x:Name="NothingSelectedGrid"
+              d:Visibility="Hidden">
+            <Label Content="Nothing selected..."
+                   FontSize="16"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" />
         </Grid>
-        
-        <Grid x:Name="TextureDetailsGrid" d:Visibility="Visible" Visibility="Hidden">
+
+        <Grid x:Name="TextureDetailsGrid"
+              d:Visibility="Visible"
+              Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label x:Name="NameLbl" Content="File name"
+            <Label x:Name="NameLbl"
+                   Content="File name"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontWeight="Bold"
                    FontSize="16" />
 
-            <Image Grid.Row="1"/>
+            <Image Grid.Row="1" />
 
-            <Grid Grid.Row="2" Margin="20,0,20,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Content="Display mode:" VerticalAlignment="Center"/>
-                <ComboBox x:Name="DisplayModeCb" Grid.Column="1" SelectionChanged="DisplayModeCb_SelectionChanged"/>
-            </Grid>
-
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   Margin="20,0,20,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Flip mode:"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Display mode:"
                        VerticalAlignment="Center" />
-                <ComboBox x:Name="FlipModeCb" Grid.Column="1" />
+                <ComboBox x:Name="DisplayModeCb"
+                          Grid.Column="1"
+                          SelectionChanged="DisplayModeCb_SelectionChanged" />
+
+                <Label Grid.Row="1"
+                       Content="Flip mode:"
+                       VerticalAlignment="Center" />
+                <ComboBox x:Name="FlipModeCb"
+                          Grid.Row="1"
+                          Grid.Column="1" />
+
+                <Label Grid.Row="2"
+                       Content="Blur sigma:"
+                       VerticalAlignment="Center" />
+                <TextBox x:Name="BlurTxt"
+                         Grid.Row="2"
+                         Grid.Column="1"
+                         Height="30"
+                         KeyUp="BlurTxt_KeyUp"/>
             </Grid>
+
+            
         </Grid>
     </Grid>
 </UserControl>

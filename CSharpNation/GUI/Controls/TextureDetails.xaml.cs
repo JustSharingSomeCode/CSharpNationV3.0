@@ -63,6 +63,8 @@ namespace CSharpNation.GUI.Controls
             Handled = true;
             DisplayModeCb.SelectedItem = texture.DisplayMode.ToString();
             Handled = false;
+
+            BlurTxt.Text = texture.BlurSigma.ToString();
         }
 
         private void InitializeComboBoxValues()
@@ -83,6 +85,22 @@ namespace CSharpNation.GUI.Controls
             }
 
             texture.DisplayMode = (Texture.Display)Enum.Parse(typeof(Texture.Display), DisplayModeCb.SelectedValue.ToString());
+        }
+
+        private void BlurTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                try
+                {
+                    float sigma = float.Parse(BlurTxt.Text);
+                    texture.BlurSigma = sigma;
+                }
+                catch
+                {
+                    BlurTxt.Text = texture.BlurSigma.ToString();
+                }
+            }
         }
     }
 }

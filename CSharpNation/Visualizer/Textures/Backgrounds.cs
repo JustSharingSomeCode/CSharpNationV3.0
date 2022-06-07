@@ -20,7 +20,7 @@ namespace CSharpNation.Visualizer.Textures
         public string Path { get; private set; }
 
         public Texture[] Textures { get; private set; }
-        public int ActualBackground = -1;
+        public int ActualBackground { get; private set; } = -1;
 
         private void LoadFiles()
         {
@@ -152,6 +152,14 @@ namespace CSharpNation.Visualizer.Textures
             if (Textures[ActualBackground].LoadFailed)
             {
                 Previous();
+            }
+        }
+
+        public void SetActualBackground(int value)
+        {
+            if (value >= 0 && value < Textures.Length)
+            {
+                ActualBackground = value;
             }
         }
     }

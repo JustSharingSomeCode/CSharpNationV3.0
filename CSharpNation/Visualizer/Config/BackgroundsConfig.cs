@@ -11,7 +11,7 @@ namespace CSharpNation.Visualizer.Config
     {
         public static void Initialize()
         {
-            Path = @"D:\USB\Bcg";
+            Path = @"D:\USB\Pxv";
             Opacity = 70;
 
             Backgrounds = new Backgrounds(Path);

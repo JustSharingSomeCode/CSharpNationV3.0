@@ -29,6 +29,7 @@ namespace CSharpNation.GUI.Controls
         }
 
         private Texture texture;
+        private bool Handled = false;
 
         public Texture Texture
         {
@@ -58,6 +59,10 @@ namespace CSharpNation.GUI.Controls
         private void UpdateDetails()
         {
             NameLbl.Content = texture.Name;
+
+            Handled = true;
+            DisplayModeCb.SelectedItem = texture.DisplayMode.ToString();
+            Handled = false;
         }
 
         private void InitializeComboBoxValues()
@@ -68,6 +73,16 @@ namespace CSharpNation.GUI.Controls
             {
                 DisplayModeCb.Items.Add(displayModes[i]);
             }
+        }
+
+        private void DisplayModeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {            
+            if(Handled)
+            {
+                return;
+            }
+
+            texture.DisplayMode = (Texture.Display)Enum.Parse(typeof(Texture.Display), DisplayModeCb.SelectedValue.ToString());
         }
     }
 }

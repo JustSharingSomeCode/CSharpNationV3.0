@@ -36,7 +36,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Content="Display mode:" VerticalAlignment="Center"/>
-                <ComboBox x:Name="DisplayModeCb" Grid.Column="1"/>
+                <ComboBox x:Name="DisplayModeCb" Grid.Column="1" SelectionChanged="DisplayModeCb_SelectionChanged"/>
             </Grid>
 
             <Grid Grid.Row="3"

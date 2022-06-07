@@ -32,11 +32,13 @@ namespace CSharpNation.GUI.Pages
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
             BackgroundsConfig.Backgrounds.Next();
+            BackgroundsList.SelectedIndex = BackgroundsConfig.Backgrounds.ActualBackground;
         }
 
         private void PreviousBtn_Click(object sender, RoutedEventArgs e)
         {
             BackgroundsConfig.Backgrounds.Previous();
+            BackgroundsList.SelectedIndex = BackgroundsConfig.Backgrounds.ActualBackground;
         }       
         
         private void UpdateBackgroundsList()
@@ -57,6 +59,7 @@ namespace CSharpNation.GUI.Pages
             if(BackgroundsList.SelectedIndex >= 0 && BackgroundsList.SelectedIndex < BackgroundsConfig.Backgrounds.Textures.Length)
             {
                 TextureDetails.Texture = BackgroundsConfig.Backgrounds.Textures[BackgroundsList.SelectedIndex];
+                BackgroundsConfig.Backgrounds.SetActualBackground(BackgroundsList.SelectedIndex);
             }            
         }
     }

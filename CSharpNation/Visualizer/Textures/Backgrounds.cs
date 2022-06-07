@@ -16,10 +16,19 @@ namespace CSharpNation.Visualizer.Textures
         {
             Path = path;
 
-            LoadFiles();
+            //LoadFiles();
         }
 
-        public string Path { get; private set; }
+        private string path;
+        public string Path
+        {
+            get { return path; }
+            set
+            {
+                path = value;
+                LoadFiles();
+            }
+        }
 
         public Texture[] Textures { get; private set; }
         public int ActualBackground { get; private set; } = -1;

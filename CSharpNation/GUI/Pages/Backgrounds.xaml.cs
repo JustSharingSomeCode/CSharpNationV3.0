@@ -26,6 +26,7 @@ namespace CSharpNation.GUI.Pages
         {
             InitializeComponent();
 
+            UpdatePathTxt.Text = BackgroundsConfig.Backgrounds.Path;
             UpdateBackgroundsList();
         }        
 
@@ -66,6 +67,12 @@ namespace CSharpNation.GUI.Pages
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             BackgroundsConfig.SaveConfig();
+        }
+
+        private void UpdatePathBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BackgroundsConfig.Backgrounds.Path = UpdatePathTxt.Text;
+            UpdateBackgroundsList();
         }
     }
 }

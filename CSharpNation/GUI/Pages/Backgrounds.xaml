@@ -21,16 +21,20 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="45" />
             </Grid.ColumnDefinitions>
 
-            <wpfui:TextBox Height="40"
+            <wpfui:TextBox x:Name="UpdatePathTxt"
+                           Height="40"
                            Placeholder="Backgrounds location..." />
-            <wpfui:Button Grid.Column="1"
+            <wpfui:Button x:Name="UpdatePathBtn" 
+                          Grid.Column="1"
                           Icon="ArrowUpload20"
-                          Margin="5"
+                          Height="40"
+                          Margin="5,0,0,0"
                           VerticalAlignment="Stretch"
-                          FontSize="16" />
+                          FontSize="16"
+                          Click="UpdatePathBtn_Click" />
         </Grid>
 
         <Grid Grid.Row="1">

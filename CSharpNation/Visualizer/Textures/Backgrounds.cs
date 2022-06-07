@@ -1,4 +1,5 @@
-﻿using CSharpNation.Visualizer.Config;
+﻿using CSharpNation.GUI.ProgressControl;
+using CSharpNation.Visualizer.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,12 +58,19 @@ namespace CSharpNation.Visualizer.Textures
                 return;
             }
 
+            int progressStart = 40;
+            double progressStep = 50.0 / Textures.Length;
+
             for (int i = 0; i < Textures.Length; i++)
             {
                 Textures[i].LoadTexture();
+                ProgressReport.Progress = progressStart + (int)(progressStep * (i + 1));
             }
 
-            Next();
+            if(ActualBackground == -1)
+            {
+                Next();
+            }            
         }
 
         public void UpdateScales(int width, int height)

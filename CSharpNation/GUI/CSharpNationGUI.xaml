@@ -112,12 +112,18 @@
         <Grid Grid.Row="2"
               Height="40"
               Margin="5,0,5,0">
+            <ProgressBar x:Name="VisualizerProgress"
+                         Height="{Binding ElementName=StartVisualizerBtn, Path=Height}"
+                         BorderThickness="0"
+                         HorizontalAlignment="Stretch"/>
             <wpfui:Button x:Name="StartVisualizerBtn"
-                          HorizontalAlignment="Right"
+                          HorizontalAlignment="Stretch"
+                          Height="30"
                           Icon="WindowPlay20"
                           Content="Start visualizer"
-                          Width="200" 
-                          Click="StartVisualizerBtn_Click"/>
+                          Click="StartVisualizerBtn_Click"
+                          Appearance="Transparent"/>
+            
         </Grid>
     </Grid>
 </Window>

@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using CSharpNation.GUI.ProgressControl;
 using CSharpNation.Visualizer;
 using CSharpNation.Visualizer.Config;
 
@@ -40,7 +40,17 @@ namespace CSharpNation.GUI
                 ChangeTheme_Click(null, null);
 
                 ConfigInit.Initialize();
+
+                ProgressReport.OnProgressChanged += ProgressReport_OnProgressChanged;
             };
+        }
+
+        private void ProgressReport_OnProgressChanged(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                VisualizerProgress.Value = ProgressReport.Progress;
+            }));
         }
 
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)

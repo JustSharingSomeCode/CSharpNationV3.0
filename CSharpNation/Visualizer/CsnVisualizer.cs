@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CSharpNation.GUI.ProgressControl;
 
 namespace CSharpNation.Visualizer
 {
@@ -20,6 +21,8 @@ namespace CSharpNation.Visualizer
         {
             //CsnConfig.Initialize();
             ConfigInit.Initialize();
+
+            ProgressReport.Progress = 0;
 
             Waves = new List<Wave>
             {
@@ -34,19 +37,29 @@ namespace CSharpNation.Visualizer
                 new Wave(0, 255, 0)
             };
 
+            ProgressReport.Progress = 10;
+
             Analyzer = AnalyzerConfig.SpectrumAnalyzer;
             Analyzer.multiplier = height / 3;
+
+            ProgressReport.Progress = 20;
 
             Logo = LogoConfig.Logo;
             Logo.LoadTexture();
             Logo.Size = height / 2;
 
+            ProgressReport.Progress = 40;
+
             Backgrounds = BackgroundsConfig.Backgrounds;
             Backgrounds.LoadTextures();
+
+            ProgressReport.Progress = 90;
 
             random = new Random();
             particles = new ParticlesController(width, height);
             particles.LoadTexture();
+
+            ProgressReport.Progress = 100;
         }
 
         private List<Wave> Waves;

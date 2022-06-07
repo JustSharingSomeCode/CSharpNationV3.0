@@ -16,19 +16,10 @@ namespace CSharpNation.Visualizer.Textures
         {
             Path = path;
 
-            //LoadFiles();
+            LoadFiles();
         }
-
-        private string path;
-        public string Path
-        {
-            get { return path; }
-            set
-            {
-                path = value;
-                LoadFiles();
-            }
-        }
+        
+        private string Path { get; set; }
 
         public Texture[] Textures { get; private set; }
         public int ActualBackground { get; private set; } = -1;
@@ -94,12 +85,12 @@ namespace CSharpNation.Visualizer.Textures
                 Textures[i].UpdateScale(width, height);
             }
         }
-
+        /*
         public void DrawBackground(float x, float y, float xMax, float yMax, int a, int r, int g, int b)
         {
             Textures[ActualBackground].DrawTexture(x, y, xMax, yMax, a, r, g, b);
         }
-
+        */
         public void DrawBackground(float x, float y, float xMax, float yMax, int a, int r, int g, int b, float power)
         {
             if (ActualBackground < 0)

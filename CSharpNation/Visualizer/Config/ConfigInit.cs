@@ -58,5 +58,18 @@ namespace CSharpNation.Visualizer.Config
             LogoConfig.Initialize();
             BackgroundsConfig.Initialize();
         }
+
+        public static string SearchConfig(string[] config, string param)
+        {
+            for(int i = 0; i < config.Length; i++)
+            {
+                if (config[i].Contains(param))
+                {
+                    return config[i].Split('=')[1];
+                }
+            }
+
+            return null;
+        }
     }
 }

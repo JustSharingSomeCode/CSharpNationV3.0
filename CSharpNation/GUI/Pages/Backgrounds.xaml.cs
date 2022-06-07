@@ -26,7 +26,8 @@ namespace CSharpNation.GUI.Pages
         {
             InitializeComponent();
 
-            UpdatePathTxt.Text = BackgroundsConfig.Backgrounds.Path;
+            UpdatePathTxt.Text = BackgroundsConfig.Path;
+            OpacitySd.Value = BackgroundsConfig.Opacity;
             UpdateBackgroundsList();
         }        
 
@@ -71,8 +72,13 @@ namespace CSharpNation.GUI.Pages
 
         private void UpdatePathBtn_Click(object sender, RoutedEventArgs e)
         {
-            BackgroundsConfig.Backgrounds.Path = UpdatePathTxt.Text;
+            BackgroundsConfig.Path = UpdatePathTxt.Text;
             UpdateBackgroundsList();
+        }
+
+        private void OpacitySd_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BackgroundsConfig.Opacity = (int)OpacitySd.Value;
         }
     }
 }

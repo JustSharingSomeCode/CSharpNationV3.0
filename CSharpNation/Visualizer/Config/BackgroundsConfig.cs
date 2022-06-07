@@ -14,34 +14,53 @@ namespace CSharpNation.Visualizer.Config
         {
             LoadConfig();
 
-            Path = @"D:\USB\Pxv";
-            Opacity = 70;
-
             Backgrounds = new Backgrounds(Path);
         }
 
-        public static string Path { get; set; }
+        private static string path;
+        public static string Path
+        {
+            get { return path; }
+            set
+            {
+                path = value;
+                Backgrounds = new Backgrounds(path);
+            }
+        }
+
         public static int Opacity { get; set; }
 
         public static Backgrounds Backgrounds { get; private set; }
 
-        private static string[] Config;
+        private static string[] config;
+        private static string[] bgConfig;
 
         public static void LoadConfig()
         {
-            if(File.Exists(ConfigInit.BackgroundsConfigPath))
+            if (File.Exists(ConfigInit.BackgroundsConfigPath))
             {
-                Config = File.ReadAllLines(ConfigInit.BackgroundsConfigPath);
+                bgConfig = File.ReadAllLines(ConfigInit.BackgroundsConfigPath);
+            }
+
+            if (File.Exists(ConfigInit.ConfigPath))
+            {
+                config = File.ReadAllLines(ConfigInit.ConfigPath);
+
+                string path = ConfigInit.SearchConfig(config, "BgPath");
+                string opacity = ConfigInit.SearchConfig(config, "Opacity");
+
+                Path = path == null ? "" : path;
+                Opacity = opacity == null ? 100 : int.Parse(opacity);
             }            
         }
 
         private static string SearchConfig(string name)
         {
-            for(int i = 0; i < Config.Length; i++)
+            for(int i = 0; i < bgConfig.Length; i++)
             {
-                if (Config[i].Contains(name))
+                if (bgConfig[i].Contains(name))
                 {
-                    return Config[i];
+                    return bgConfig[i];
                 }
             }
 
@@ -71,11 +90,11 @@ namespace CSharpNation.Visualizer.Config
 
             bool exists = false;
 
-            for(int i = 0; i < Config.Length; i++)
+            for(int i = 0; i < bgConfig.Length; i++)
             {
                 for(int j = 0; j < newConfig.Count; j++)
                 {
-                    if (newConfig[j].Contains(Config[i].Split('|')[0]))
+                    if (newConfig[j].Contains(bgConfig[i].Split('|')[0]))
                     {
                         exists = true;
                         break;
@@ -84,7 +103,7 @@ namespace CSharpNation.Visualizer.Config
 
                 if(!exists)
                 {
-                    newConfig.Add(Config[i]);
+                    newConfig.Add(bgConfig[i]);
                 }
                 else
                 {
@@ -93,6 +112,12 @@ namespace CSharpNation.Visualizer.Config
             }
 
             File.WriteAllLines(ConfigInit.BackgroundsConfigPath, newConfig.ToArray());
+
+            config = new string[2];
+            config[0] = "BgPath=" + Path;
+            config[1] = "Opacity=" + Opacity.ToString();
+
+            File.WriteAllLines(ConfigInit.ConfigPath, config);
         }
     }
 }

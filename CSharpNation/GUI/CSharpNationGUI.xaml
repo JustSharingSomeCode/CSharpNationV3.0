@@ -9,8 +9,8 @@
         Style="{StaticResource UiWindow}"
         mc:Ignorable="d"
         Title="CSharpNationGUI"
-        Height="576"
-        Width="1024"
+        MinHeight="576"
+        MinWidth="1024"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>

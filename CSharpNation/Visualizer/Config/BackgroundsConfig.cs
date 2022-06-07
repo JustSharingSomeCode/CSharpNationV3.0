@@ -50,12 +50,11 @@ namespace CSharpNation.Visualizer.Config
 
         public static void UpdateTextureConfig(Texture texture)
         {
-            string config = SearchConfig(texture.Name);
-
-            string[] data = config.Split('|');
+            string config = SearchConfig(texture.Name);            
 
             if(config != null)
             {
+                string[] data = config.Split('|');
                 texture.DisplayMode = (Texture.Display)Enum.Parse(typeof(Texture.Display), data[1]);
                 texture.BlurSigma = float.Parse(data[2]);
             }

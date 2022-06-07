@@ -65,5 +65,11 @@ namespace CSharpNation.GUI
         {
             CsnVisualizerThread.StartVisualizer();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CsnVisualizerThread.Cleanup();
+            AnalyzerConfig.SpectrumAnalyzer.Free();
+        }
     }
 }

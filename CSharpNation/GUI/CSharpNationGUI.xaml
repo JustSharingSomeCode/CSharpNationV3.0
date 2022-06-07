@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Title="CSharpNationGUI"
         Height="576"
-        Width="1024">
+        Width="1024"
+        Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

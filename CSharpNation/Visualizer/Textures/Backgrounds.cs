@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -37,11 +38,13 @@ namespace CSharpNation.Visualizer.Textures
             for (int i = 0; i < jpgFiles.Length; i++)
             {
                 Textures[i] = new Texture(jpgFiles[i]);
+                BackgroundsConfig.UpdateTextureConfig(Textures[i]);
             }
 
             for (int i = 0; i < pngFiles.Length; i++)
             {
                 Textures[i + jpgFiles.Length] = new Texture(pngFiles[i]);
+                BackgroundsConfig.UpdateTextureConfig(Textures[i + jpgFiles.Length]);
             }
 
             Debug.WriteLine("Loaded {0} backgrounds", Textures.Length);

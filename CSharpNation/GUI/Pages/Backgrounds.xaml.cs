@@ -62,5 +62,10 @@ namespace CSharpNation.GUI.Pages
                 BackgroundsConfig.Backgrounds.SetActualBackground(BackgroundsList.SelectedIndex);
             }            
         }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BackgroundsConfig.SaveConfig();
+        }
     }
 }

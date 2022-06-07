@@ -66,10 +66,7 @@ namespace CSharpNation.Visualizer.Textures
                 {
                     OriginalWidth = image.Width;
                     OriginalHeight = image.Height;
-
-                    WidthRatio = (float)OriginalWidth / OriginalHeight;
-                    HeightRatio = (float)OriginalHeight / OriginalWidth;
-
+                    
                     switch (DisplayMode)
                     {
                         case Display.MirroredLeftHalf:
@@ -82,7 +79,10 @@ namespace CSharpNation.Visualizer.Textures
                             break;
                     }
 
-                    if(BlurSigma != 0)
+                    WidthRatio = (float)OriginalWidth / OriginalHeight;
+                    HeightRatio = (float)OriginalHeight / OriginalWidth;
+
+                    if (BlurSigma != 0)
                     {
                         image.Mutate(x => x.GaussianBlur(BlurSigma));
                     }                    
@@ -196,6 +196,11 @@ namespace CSharpNation.Visualizer.Textures
             GL.End();
             GL.Disable(EnableCap.Texture2D);
             GL.Disable(EnableCap.Blend);
+        }
+
+        public override string ToString()
+        {
+            return Path + "|" + DisplayMode.ToString() + "|" + BlurSigma.ToString();
         }
     }
 }

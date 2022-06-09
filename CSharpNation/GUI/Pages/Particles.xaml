@@ -1,14 +1,62 @@
 ﻿<Page x:Class="CSharpNation.GUI.Pages.Particles"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:CSharpNation.GUI.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
       Title="Particles">
 
-    <Grid>
-        
+    <Grid Margin="18,0,18,18">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Texture path:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:TextBox x:Name="TexturePathTxt"
+                       Grid.Column="2"
+                       Height="30" 
+                       KeyUp="TexturePathTxt_KeyUp"/>
+
+        <Label Grid.Row="1"
+               Content="Max particles:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="MaxParticlesNb" Grid.Row="1"
+                         Grid.Column="2"
+                         Height="30" 
+                         TextChanged="MaxParticlesNb_TextChanged"/>
+
+        <Label Grid.Row="2"
+               Content="Blur sigma:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="BlurSigmaNb" Grid.Row="2"
+                         Grid.Column="2"
+                         Height="30" 
+                         TextChanged="BlurSigmaNb_TextChanged"/>
+
+        <wpfui:Button x:Name="SaveBtn"
+                      Grid.Row="3"
+                      Grid.ColumnSpan="3"
+                      Height="30"
+                      Icon="Save24"
+                      Content="Save config"
+                      Click="SaveBtn_Click" />
     </Grid>
 </Page>

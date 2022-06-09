@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,33 @@ namespace CSharpNation.GUI.Pages
         public Particles()
         {
             InitializeComponent();
+
+            TexturePathTxt.Text = ParticlesConfig.TexturePath;
+            MaxParticlesNb.Value = ParticlesConfig.MaxParticles;
+            BlurSigmaNb.Value = ParticlesConfig.BlurSigma;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ParticlesConfig.SaveConfig();
+        }
+
+        private void TexturePathTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                ParticlesConfig.TexturePath = TexturePathTxt.Text;
+            }
+        }
+
+        private void MaxParticlesNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParticlesConfig.MaxParticles = (int)MaxParticlesNb.Value;
+        }
+
+        private void BlurSigmaNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParticlesConfig.BlurSigma = (float)BlurSigmaNb.Value;
         }
     }
 }

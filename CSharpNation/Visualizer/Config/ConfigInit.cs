@@ -57,6 +57,7 @@ namespace CSharpNation.Visualizer.Config
             AnalyzerConfig.Initialize();
             LogoConfig.Initialize();
             BackgroundsConfig.Initialize();
+            ParticlesConfig.Initialize();
         }
 
         public static string SearchConfig(string[] config, string param)

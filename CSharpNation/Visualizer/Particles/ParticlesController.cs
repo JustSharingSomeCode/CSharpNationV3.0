@@ -1,4 +1,5 @@
-﻿using CSharpNation.Visualizer.Textures;
+﻿using CSharpNation.Visualizer.Config;
+using CSharpNation.Visualizer.Textures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace CSharpNation.Visualizer.Particles
             Particles = new List<Particle>();
             random = new Random();
 
-            texture = new Texture(@"C:\ProgramData\CSharpNationV2.0\Resources\Particle.png");
+            //@"C:\ProgramData\CSharpNationV2.0\Resources\Particle.png"
+            texture = new Texture(ParticlesConfig.TexturePath);
+            texture.BlurSigma = ParticlesConfig.BlurSigma;
 
             //Initialize random
             for (int i = 0; i < 1000; i++)
@@ -30,7 +33,7 @@ namespace CSharpNation.Visualizer.Particles
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public int MaxParticles { get; set; } = 500;
+        //public int MaxParticles { get; set; } = 500;
 
         private Random random;
         private Texture texture;
@@ -48,7 +51,7 @@ namespace CSharpNation.Visualizer.Particles
 
         public void Update(float multiplier)
         {
-            while (Particles.Count < MaxParticles)
+            while (Particles.Count < ParticlesConfig.MaxParticles)
             {
                 Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(200, 256)));
             }

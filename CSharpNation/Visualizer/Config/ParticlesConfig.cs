@@ -31,7 +31,7 @@ namespace CSharpNation.Visualizer.Config
             string max = ConfigInit.SearchConfig(config, "MaxParticles");
             string blur = ConfigInit.SearchConfig(config, "BlurSigma");
 
-            TexturePath = path == null ? "" : path;
+            TexturePath = (path == null || path == "") ? ConfigInit.ResourcesDirectoryPath + @"\Particle.png" : path;
             MaxParticles = max == null ? 500 : int.Parse(max);
             BlurSigma = blur == null ? 0 : float.Parse(blur);
         }

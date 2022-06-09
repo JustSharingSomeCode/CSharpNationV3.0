@@ -11,7 +11,7 @@ namespace CSharpNation.Visualizer.Config
     {
         public static void Initialize()
         {
-            TexturePath = @"C:\ProgramData\CSharpNationV2.0\Resources\Logo.png";
+            TexturePath = ConfigInit.ResourcesDirectoryPath + @"\Logo.png";
             BlurSigma = 1f;
 
             Logo = new Logo(TexturePath);

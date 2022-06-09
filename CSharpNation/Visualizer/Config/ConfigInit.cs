@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace CSharpNation.Visualizer.Config
         {
             if(!Initialized)
             {
+                CheckResourcesDirectory();
                 CheckFiles();
                 InitializeConfig();
 
@@ -23,6 +25,7 @@ namespace CSharpNation.Visualizer.Config
         private static bool Initialized = false;
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV5_0";
+        public static string ResourcesDirectoryPath { get; } = ConfigDirectoryPath + @"\Resources";
         public static string ConfigPath { get; } = ConfigDirectoryPath + @"\Config.txt";
         public static string BackgroundsConfigPath { get; } = ConfigDirectoryPath + @"\Backgrounds.txt";
         public static string ParticlesConfigPath { get; } = ConfigDirectoryPath + @"\Particles.txt";
@@ -49,6 +52,22 @@ namespace CSharpNation.Visualizer.Config
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
+            }
+        }
+
+        private static void CheckResourcesDirectory()
+        {
+            if (!Directory.Exists(ResourcesDirectoryPath))
+            {
+                _ = Directory.CreateDirectory(ResourcesDirectoryPath);
+
+                Bitmap logo = new Bitmap(Properties.Resources.Logo);
+                logo.Save(ResourcesDirectoryPath + @"\Logo.png");
+                logo.Dispose();
+
+                Bitmap particle = new Bitmap(Properties.Resources.Particle);
+                particle.Save(ResourcesDirectoryPath + @"\Particle.png");
+                particle.Dispose();
             }
         }
 

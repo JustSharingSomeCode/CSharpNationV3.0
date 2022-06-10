@@ -32,6 +32,14 @@ namespace CSharpNation.GUI.Pages
         private void Initialize()
         {
             ErrorLogger.OnErrorAdded += ErrorLogger_OnErrorAdded;
+
+            if (ErrorLogger.Errors.Count != 0)
+            {
+                for(int i = 0; i < ErrorLogger.Errors.Count; i++)
+                {
+                    AddError(ErrorLogger.Errors[i]);
+                }
+            }
         }
 
         private void ErrorLogger_OnErrorAdded(object sender, EventArgs e)

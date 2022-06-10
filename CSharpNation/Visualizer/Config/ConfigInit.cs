@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Logger;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -37,6 +38,7 @@ namespace CSharpNation.Visualizer.Config
             if (!Directory.Exists(ConfigDirectoryPath))
             {
                 Directory.CreateDirectory(ConfigDirectoryPath);
+                ErrorLogger.AddError(Error.Type.Information, "Created config directory at: " + ConfigDirectoryPath);
             }
 
             CheckFile(ConfigPath);
@@ -52,6 +54,7 @@ namespace CSharpNation.Visualizer.Config
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
+                ErrorLogger.AddError(Error.Type.Information, "Created config file at: " + path);
             }
         }
 
@@ -60,14 +63,19 @@ namespace CSharpNation.Visualizer.Config
             if (!Directory.Exists(ResourcesDirectoryPath))
             {
                 _ = Directory.CreateDirectory(ResourcesDirectoryPath);
+                ErrorLogger.AddError(Error.Type.Information, "Created resources directory at: " + ResourcesDirectoryPath);
 
                 Bitmap logo = new Bitmap(Properties.Resources.Logo);
                 logo.Save(ResourcesDirectoryPath + @"\Logo.png");
                 logo.Dispose();
 
+                ErrorLogger.AddError(Error.Type.Information, "Created resource file at: " + ResourcesDirectoryPath + @"\Logo.png");
+
                 Bitmap particle = new Bitmap(Properties.Resources.Particle);
                 particle.Save(ResourcesDirectoryPath + @"\Particle.png");
                 particle.Dispose();
+
+                ErrorLogger.AddError(Error.Type.Information, "Created resource file at: " + ResourcesDirectoryPath + @"\Particle.png");
             }
         }
 

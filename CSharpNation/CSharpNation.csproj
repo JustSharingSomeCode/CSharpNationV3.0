@@ -88,6 +88,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GUI\Controls\ErrorDetails.xaml.cs">
+      <DependentUpon>ErrorDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\TextureDetails.xaml.cs">
       <DependentUpon>TextureDetails.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,8 @@
     <Compile Include="Visualizer\Config\WavesConfig.cs" />
     <Compile Include="Visualizer\CsnVisualizer.cs" />
     <Compile Include="Visualizer\CsnVisualizerThread.cs" />
+    <Compile Include="Visualizer\Logger\Error.cs" />
+    <Compile Include="Visualizer\Logger\ErrorLogger.cs" />
     <Compile Include="Visualizer\Particles\Particle.cs" />
     <Compile Include="Visualizer\Particles\ParticlesController.cs" />
     <Compile Include="Visualizer\Textures\Backgrounds.cs" />
@@ -162,6 +167,10 @@
     <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="GUI\Controls\ErrorDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Controls\TextureDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

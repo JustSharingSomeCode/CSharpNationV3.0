@@ -77,10 +77,10 @@
                                           Page="{x:Type pages:Analyzer}"
                                           PageTag="analyzer" />
                     
-                    <wpfui:NavigationItem Content="Errors"
+                    <wpfui:NavigationItem Content="Log"
                                           Icon="Bug20"
                                           Page="{x:Type pages:Errors}"
-                                          PageTag="Errors" />
+                                          PageTag="Log" />
 
                 </wpfui:NavigationStore.Items>
                 <wpfui:NavigationStore.Footer>

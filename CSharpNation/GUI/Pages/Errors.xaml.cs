@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpNation.GUI.Controls;
+using CSharpNation.Visualizer.Logger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,44 @@ namespace CSharpNation.GUI.Pages
         public Errors()
         {
             InitializeComponent();
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            ErrorLogger.OnErrorAdded += ErrorLogger_OnErrorAdded;
+        }
+
+        private void ErrorLogger_OnErrorAdded(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                AddError((Error)sender);
+            }));
+        }
+
+        private void AddError(Error error)
+        {
+            ErrorDetails details = new ErrorDetails()
+            {
+                Error = error,
+                Margin = new Thickness(0, 0, 0, 5),
+            };
+
+            ErrorsStack.Children.Add(details);
+            ScrollStack.ScrollToBottom();
+        }
+
+        private void ClearLogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //AddError(new Error(Error.Type.Fatal, "Fatal error demo"));
+            ErrorsStack.Children.Clear();
+        }
+
+        private void SaveLogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //AddError(new Error(Error.Type.Information, "Information error demo"));
         }
     }
 }

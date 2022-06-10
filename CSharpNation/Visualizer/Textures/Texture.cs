@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CSharpNation.Visualizer.Logger;
 using OpenTK.Graphics.OpenGL;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -119,6 +119,7 @@ namespace CSharpNation.Visualizer.Textures
                 //Console.WriteLine(ex.Message);
                 Debug.WriteLine("Failed loading texture at: {0}", Path);
                 Debug.WriteLine(ex.ToString());
+                ErrorLogger.AddError(Error.Type.Information, "Failed loading texture at: " + Path);
             }
         }
 

@@ -50,6 +50,11 @@ namespace CSharpNation.GUI.Pages
 
             Texture[] textures = BackgroundsConfig.Backgrounds.Textures;
 
+            if(textures == null)
+            {
+                return;
+            }
+
             for(int i = 0; i < textures.Length; i++)
             {
                 BackgroundsList.Items.Add(textures[i].Path);

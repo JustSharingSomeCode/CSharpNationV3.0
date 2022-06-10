@@ -2,13 +2,32 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:CSharpNation.GUI.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Errors">
 
-    <Grid>
-        
+    <Grid Margin="18,0,18,18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ListBox />
+        </ScrollViewer>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <wpfui:Button Content="Clear log" Icon="Delete24" VerticalAlignment="Bottom"/>
+            <wpfui:Button Grid.Column="2" Content="Save log" Icon="Save24" VerticalAlignment="Bottom"/>
+        </Grid>
     </Grid>
 </Page>

@@ -14,18 +14,20 @@ namespace CSharpNation.Visualizer.Config
             LoadConfig();
         }
 
-        public static string TexturePath { get; set; }
-        public static int MaxParticles { get; set; }
-        public static float BlurSigma { get; set; }
+        public static string TexturePath { get; set; } = ConfigInit.ResourcesDirectoryPath + @"\Particle.png";
+        public static int MaxParticles { get; set; } = 500;
+        public static float BlurSigma { get; set; } = 0;
 
         private static string[] config;
 
         public static void LoadConfig()
         {
-            if (File.Exists(ConfigInit.ParticlesConfigPath))
+            if (!File.Exists(ConfigInit.ParticlesConfigPath))
             {
-                config = File.ReadAllLines(ConfigInit.ParticlesConfigPath);
+                return;
             }
+
+            config = File.ReadAllLines(ConfigInit.ParticlesConfigPath);
 
             string path = ConfigInit.SearchConfig(config,"TexturePath");
             string max = ConfigInit.SearchConfig(config, "MaxParticles");

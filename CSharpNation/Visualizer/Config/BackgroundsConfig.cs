@@ -28,7 +28,7 @@ namespace CSharpNation.Visualizer.Config
             }
         }
 
-        public static int Opacity { get; set; }
+        public static int Opacity { get; set; } = 100;
 
         public static Backgrounds Backgrounds { get; private set; }
 

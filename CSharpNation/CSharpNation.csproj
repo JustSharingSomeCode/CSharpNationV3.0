@@ -91,6 +91,9 @@
     <Compile Include="GUI\Controls\TextureDetails.xaml.cs">
       <DependentUpon>TextureDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Pages\Errors.xaml.cs">
+      <DependentUpon>Errors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ProgressControl\ProgressReport.cs" />
     <Compile Include="Visualizer\Analyzer\SpectrumAnalyzer.cs" />
     <Compile Include="Visualizer\Config\AnalyzerConfig.cs" />
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Pages\Backgrounds.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Pages\Errors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

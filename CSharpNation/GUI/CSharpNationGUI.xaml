@@ -76,11 +76,14 @@
                                           Icon="SoundSource24"
                                           Page="{x:Type pages:Analyzer}"
                                           PageTag="analyzer" />
+                    
+                    <wpfui:NavigationItem Content="Errors"
+                                          Icon="Bug20"
+                                          Page="{x:Type pages:Errors}"
+                                          PageTag="Errors" />
 
                 </wpfui:NavigationStore.Items>
                 <wpfui:NavigationStore.Footer>
-                    <wpfui:NavigationItem Content="Settings"
-                                          Icon="Diversity24" />
                     <!--  A navigation element that does not point to the page can be used as a button.  -->
                     <wpfui:NavigationItem Click="ChangeTheme_Click"
                                           Content="Theme"

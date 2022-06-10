@@ -44,7 +44,9 @@ namespace CSharpNation.Visualizer
 
             ProgressReport.Progress = 20;
 
-            Logo = LogoConfig.Logo;
+            //Logo = LogoConfig.Logo;
+            Logo = new Logo(LogoConfig.TexturePath);
+            Logo.BlurSigma = LogoConfig.BlurSigma;
             Logo.LoadTexture();
             Logo.Size = height / 2;
 

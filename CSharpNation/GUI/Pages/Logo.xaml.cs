@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,27 @@ namespace CSharpNation.GUI.Pages
         public Logo()
         {
             InitializeComponent();
+
+            TexturePathTxt.Text = LogoConfig.TexturePath;
+            BlurSigmaNb.Value = LogoConfig.BlurSigma;
+        }
+
+        private void TexturePathTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LogoConfig.TexturePath = TexturePathTxt.Text;
+            }
+        }
+
+        private void BlurSigmaNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LogoConfig.BlurSigma = (float)BlurSigmaNb.Value;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LogoConfig.SaveConfig();
         }
     }
 }

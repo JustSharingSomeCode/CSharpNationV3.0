@@ -4,11 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CSharpNation.GUI.Pages"
+      xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Logo">
 
     <Grid Margin="18,0,18,18">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Texture path:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:TextBox x:Name="TexturePathTxt"
+                       Grid.Column="2"
+                       Height="30"
+                       KeyUp="TexturePathTxt_KeyUp" />
+
+        <Label Grid.Row="1"
+               Content="Blur sigma:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="BlurSigmaNb"
+                         Grid.Row="1"
+                         Grid.Column="2"
+                         Height="30"
+                         TextChanged="BlurSigmaNb_TextChanged" />
+
+        <wpfui:Button x:Name="SaveBtn"
+                      Grid.Row="2"
+                      Grid.ColumnSpan="3"
+                      Height="30"
+                      Icon="Save24"
+                      Content="Save config"
+                      Click="SaveBtn_Click" />
     </Grid>
 </Page>

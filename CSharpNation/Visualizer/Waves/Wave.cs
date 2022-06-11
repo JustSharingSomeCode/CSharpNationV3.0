@@ -96,7 +96,10 @@ namespace CSharpNation.Visualizer.Waves
                 {
                     GL.Color3(Color.FromArgb(255, 0, 0, 0));
                     GL.Begin(PrimitiveType.Lines);
+
                     GL.Vertex2(GlowPoints[j]);
+
+                    GL.Color3(Color.FromArgb(255, 0, 255, 0));
                     GL.Vertex2(GlowPoints[j + 1]);
                     GL.End();
                 }
@@ -186,14 +189,14 @@ namespace CSharpNation.Visualizer.Waves
                 Vector2 add = Vector2.Add(a, b);
                 Vector2 middlePoint = Vector2.Divide(add, 2);
 
-                float dx = b.X - a.X;
-                float dy = b.Y - a.Y;
+                float dx = a.X - b.X;
+                float dy = a.Y - b.Y;
 
-                //Vector2 n1 = new Vector2(-dy + middlePoint.Y, dx + middlePoint.X);
-                //Vector2 n2 = new Vector2(dy + middlePoint.Y, -dx + middlePoint.X);
+                Vector2 n1 = new Vector2(-dy + middlePoint.X, dx + middlePoint.Y);
+                Vector2 n2 = new Vector2(dy + middlePoint.X, -dx + middlePoint.Y);
 
-                Vector2 n1 = new Vector2(dx + middlePoint.X, -dy + middlePoint.Y);
-                Vector2 n2 = new Vector2(-dx + middlePoint.X, dy + middlePoint.Y);
+                //Vector2 n1 = new Vector2(dx + middlePoint.X, -dy + middlePoint.Y);
+                //Vector2 n2 = new Vector2(-dx + middlePoint.X, dy + middlePoint.Y);
 
                 GlowPoints.Add(n1);
                 //GlowPoints.Add(middlePoint);

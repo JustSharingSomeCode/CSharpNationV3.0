@@ -195,12 +195,22 @@ namespace CSharpNation.Visualizer.Waves
                 Vector2 n1 = new Vector2(-dy + middlePoint.X, dx + middlePoint.Y);
                 Vector2 n2 = new Vector2(dy + middlePoint.X, -dx + middlePoint.Y);
 
+                Vector2 c = Vector2.Subtract(n2, middlePoint);
+
+                float cSum = Math.Abs(c.X) + Math.Abs(c.Y);
+
+                Vector2 norm = new Vector2(c.X / cSum, c.Y / cSum);
+
+                Vector2 d = Vector2.Multiply(norm, 20);
+
+                Vector2 e = Vector2.Add(middlePoint, d);
+
                 //Vector2 n1 = new Vector2(dx + middlePoint.X, -dy + middlePoint.Y);
                 //Vector2 n2 = new Vector2(-dx + middlePoint.X, dy + middlePoint.Y);
 
                 //GlowPoints.Add(n1);
                 GlowPoints.Add(middlePoint);
-                GlowPoints.Add(n2);
+                GlowPoints.Add(e);
             }
         }
 

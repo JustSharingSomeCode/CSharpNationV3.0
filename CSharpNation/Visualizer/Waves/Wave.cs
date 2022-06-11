@@ -27,6 +27,10 @@ namespace CSharpNation.Visualizer.Waves
         public List<float> Spectrum { get; set; }
         public List<float> PreviousSpectrum { get; set; }
 
+
+        public bool EnableGlow { get; set; } = true;
+        private List<Vector2> GlowPoints { get; set; } = new List<Vector2>();
+
         public double Quality { get; set; } = 0.1;
 
         private float X { get; set; }
@@ -58,6 +62,8 @@ namespace CSharpNation.Visualizer.Waves
                 return;
             }
 
+            
+            
             for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
             {
                 GL.Color3(Color.FromArgb(255, R, G, B));
@@ -81,6 +87,20 @@ namespace CSharpNation.Visualizer.Waves
                 GL.Vertex2(X, Y);
 
                 GL.End();
+            }
+
+            if (EnableGlow)
+            {
+                
+                for (int j = 0; j < GlowPoints.Count - 1; j+=2)
+                {
+                    GL.Color3(Color.FromArgb(255, 0, 0, 0));
+                    GL.Begin(PrimitiveType.Lines);
+                    GL.Vertex2(GlowPoints[j]);
+                    GL.Vertex2(GlowPoints[j + 1]);
+                    GL.End();
+                }
+                
             }
 
 
@@ -122,6 +142,11 @@ namespace CSharpNation.Visualizer.Waves
                     CatmullRomPoints.Add(CatmullRom((float)j, p1, p2, p3, p4));
                 }
             }
+
+            if(EnableGlow)
+            {
+                UpdateGlowPoints();
+            }
         }
 
 
@@ -147,6 +172,33 @@ namespace CSharpNation.Visualizer.Waves
             Vector2 pos = 0.5f * (a + (b * t) + (c * t * t) + (d * t * t * t));
 
             return pos;
+        }
+
+        private void UpdateGlowPoints()
+        {
+            GlowPoints.Clear();
+
+            for(int i = 0; i < CatmullRomPoints.Count - 1; i++)
+            {
+                Vector2 a = CatmullRomPoints[i];
+                Vector2 b = CatmullRomPoints[i + 1];
+
+                Vector2 add = Vector2.Add(a, b);
+                Vector2 middlePoint = Vector2.Divide(add, 2);
+
+                float dx = b.X - a.X;
+                float dy = b.Y - a.Y;
+
+                //Vector2 n1 = new Vector2(-dy + middlePoint.Y, dx + middlePoint.X);
+                //Vector2 n2 = new Vector2(dy + middlePoint.Y, -dx + middlePoint.X);
+
+                Vector2 n1 = new Vector2(dx + middlePoint.X, -dy + middlePoint.Y);
+                Vector2 n2 = new Vector2(-dx + middlePoint.X, dy + middlePoint.Y);
+
+                GlowPoints.Add(n1);
+                //GlowPoints.Add(middlePoint);
+                GlowPoints.Add(n2);
+            }
         }
 
 

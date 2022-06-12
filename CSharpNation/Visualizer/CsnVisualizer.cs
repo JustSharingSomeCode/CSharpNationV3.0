@@ -26,15 +26,15 @@ namespace CSharpNation.Visualizer
 
             Waves = new List<Wave>
             {
-                new Wave(255, 255, 255) { Quality = 0.2f},
-                //new Wave(255, 255, 0),
-                //new Wave(255, 150, 0),
-                //new Wave(255, 0, 0),
-                //new Wave(255, 100, 255),
-                //new Wave(50, 50, 155),
-                //new Wave(0, 0, 255),
-                //new Wave(50, 200, 255),
-                //new Wave(0, 255, 0)
+                new Wave(255, 255, 255),
+                new Wave(255, 255, 0),
+                new Wave(255, 150, 0),
+                new Wave(255, 0, 0),
+                new Wave(255, 100, 255),
+                new Wave(50, 50, 155),
+                new Wave(0, 0, 255),
+                new Wave(50, 200, 255),
+                new Wave(0, 255, 0)
             };
 
             ProgressReport.Progress = 10;

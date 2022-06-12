@@ -64,46 +64,136 @@ namespace CSharpNation.Visualizer.Waves
 
 
 
-            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            {
+                GL.Color3(Color.FromArgb(255, R, G, B));
+                GL.Begin(PrimitiveType.Triangles);
+
+                GL.Vertex2(CatmullRomPoints[j]);
+                GL.Vertex2(CatmullRomPoints[j + 1]);
+                GL.Vertex2(X, Y);
+
+                GL.End();
+            }
+
+
+            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            {
+                GL.Color3(Color.FromArgb(255, R, G, B));
+                GL.Begin(PrimitiveType.Triangles);
+
+                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
+                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
+                GL.Vertex2(X, Y);
+
+                GL.End();
+            }
+
+            //if (EnableGlow)
             //{
-            //    GL.Color3(Color.FromArgb(255, R, G, B));
-            //    GL.Begin(PrimitiveType.Triangles);
 
-            //    GL.Vertex2(CatmullRomPoints[j]);
-            //    GL.Vertex2(CatmullRomPoints[j + 1]);
-            //    GL.Vertex2(X, Y);
+            //    for (int j = 0; j < GlowPoints.Count - 1; j+=2)
+            //    {
+            //        GL.Color3(Color.FromArgb(255, 0, 0, 0));
+            //        GL.Begin(PrimitiveType.Lines);
 
-            //    GL.End();
-            //}
+            //        GL.Vertex2(GlowPoints[j]);
 
+            //        GL.Color3(Color.FromArgb(255, 0, 255, 0));
+            //        GL.Vertex2(GlowPoints[j + 1]);
+            //        GL.End();
+            //    }
 
-            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
-            //{
-            //    GL.Color3(Color.FromArgb(255, R, G, B));
-            //    GL.Begin(PrimitiveType.Triangles);
-
-            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
-            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
-            //    GL.Vertex2(X, Y);
-
-            //    GL.End();
             //}
 
             if (EnableGlow)
             {
-                
-                for (int j = 0; j < GlowPoints.Count - 1; j+=2)
+                for (int j = 0; j < GlowPoints.Count - 3; j += 2)
                 {
-                    GL.Color3(Color.FromArgb(255, 0, 0, 0));
-                    GL.Begin(PrimitiveType.Lines);
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
 
-                    GL.Vertex2(GlowPoints[j]);
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    GL.Vertex2(GlowPoints[j]); // middle point
 
-                    GL.Color3(Color.FromArgb(255, 0, 255, 0));
-                    GL.Vertex2(GlowPoints[j + 1]);
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(GlowPoints[j + 1]); //n2
+
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    GL.Vertex2(GlowPoints[j + 2]); // middle point
                     GL.End();
+                    GL.Disable(EnableCap.Blend);
+
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(GlowPoints[j+1]); // n2
+
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    GL.Vertex2(GlowPoints[j + 2]); //middle point
+
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(GlowPoints[j + 3]); //n2
+                    GL.End();                    
+                    GL.Disable(EnableCap.Blend);
                 }
-                
+
+                //mirror
+                for (int j = 0; j < GlowPoints.Count - 3; j += 2)
+                {
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    //GL.Vertex2(GlowPoints[j]); // middle point
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j]), GlowPoints[j].Y);
+
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    //GL.Vertex2(GlowPoints[j + 1]); //n2
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j + 1]), GlowPoints[j + 1].Y);
+
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    //GL.Vertex2(GlowPoints[j + 2]); // middle point
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j + 2]), GlowPoints[j + 2].Y);
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    //GL.Vertex2(GlowPoints[j + 1]); // n2
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j + 1]), GlowPoints[j + 1].Y);
+
+                    //GL.Color4(Color.FromArgb(255, 0, 0, 0));
+                    GL.Color4(Color.FromArgb(80, R, G, B));
+                    //GL.Vertex2(GlowPoints[j + 2]); //middle point
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j + 2]), GlowPoints[j + 2].Y);
+
+                    //GL.Color4(Color.FromArgb(0, 0, 255, 0));
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    //GL.Vertex2(GlowPoints[j + 3]); //n2
+                    GL.Vertex2(MirrorPosition(X, GlowPoints[j + 3]), GlowPoints[j + 3].Y);
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+                }
             }
 
 
@@ -225,7 +315,7 @@ namespace CSharpNation.Visualizer.Waves
                 GlowPoints.Add(middlePoint);
                 GlowPoints.Add(n2);
 
-                Console.WriteLine("{0}) Distance: {1}", i, Vector2.Distance(middlePoint, n2));
+                //Console.WriteLine("{0}) Distance: {1}", i, Vector2.Distance(middlePoint, n2));
             }
         }
 

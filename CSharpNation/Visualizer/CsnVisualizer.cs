@@ -26,7 +26,7 @@ namespace CSharpNation.Visualizer
 
             Waves = new List<Wave>
             {
-                new Wave(255, 255, 255),
+                new Wave(255, 255, 255) { Quality = 0.5f},
                 //new Wave(255, 255, 0),
                 //new Wave(255, 150, 0),
                 //new Wave(255, 0, 0),

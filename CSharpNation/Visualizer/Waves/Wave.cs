@@ -62,32 +62,32 @@ namespace CSharpNation.Visualizer.Waves
                 return;
             }
 
-            
-            
-            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
-            //{
-            //    GL.Color3(Color.FromArgb(255, R, G, B));
-            //    GL.Begin(PrimitiveType.Triangles);
-
-            //    GL.Vertex2(CatmullRomPoints[j]);
-            //    GL.Vertex2(CatmullRomPoints[j + 1]);
-            //    GL.Vertex2(X, Y);
-
-            //    GL.End();
-            //}
 
 
-            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
-            //{
-            //    GL.Color3(Color.FromArgb(255, R, G, B));
-            //    GL.Begin(PrimitiveType.Triangles);
+            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            {
+                GL.Color3(Color.FromArgb(255, R, G, B));
+                GL.Begin(PrimitiveType.Triangles);
 
-            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
-            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
-            //    GL.Vertex2(X, Y);
+                GL.Vertex2(CatmullRomPoints[j]);
+                GL.Vertex2(CatmullRomPoints[j + 1]);
+                GL.Vertex2(X, Y);
 
-            //    GL.End();
-            //}
+                GL.End();
+            }
+
+
+            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            {
+                GL.Color3(Color.FromArgb(255, R, G, B));
+                GL.Begin(PrimitiveType.Triangles);
+
+                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
+                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
+                GL.Vertex2(X, Y);
+
+                GL.End();
+            }
 
             if (EnableGlow)
             {
@@ -186,14 +186,34 @@ namespace CSharpNation.Visualizer.Waves
                 Vector2 a = CatmullRomPoints[i];
                 Vector2 b = CatmullRomPoints[i + 1];
 
+                //Console.WriteLine("{0}) ({1}, {2}) , ({3}, {4}), Distance: {5}", i, a.X, a.Y, b.X, b.Y, Vector2.Distance(a, b));
+                if (Vector2.Distance(a, b) < 0.05f)
+                {
+                    continue;
+                }
+
                 Vector2 add = Vector2.Add(a, b);
                 Vector2 middlePoint = Vector2.Divide(add, 2);
 
                 float dx = a.X - b.X;
                 float dy = a.Y - b.Y;
 
-                Vector2 n1 = new Vector2(-dy + middlePoint.X, dx + middlePoint.Y);
-                Vector2 n2 = new Vector2(dy + middlePoint.X, -dx + middlePoint.Y);
+                float sum = Math.Abs(dx) + Math.Abs(dy);
+                float rx = dx / sum;
+                float ry = dy / sum;
+
+                float size = 20;
+
+                Console.WriteLine("rx + ry = {0}", Math.Abs(rx) + Math.Abs(ry));
+
+                float tx = rx * size;
+                float ty = ry * size;
+
+                //Vector2 n1 = new Vector2(-dy + middlePoint.X, dx + middlePoint.Y);
+                //Vector2 n2 = new Vector2(dy + middlePoint.X, -dx + middlePoint.Y);
+
+                Vector2 n1 = new Vector2(-ty + middlePoint.X, tx + middlePoint.Y);
+                Vector2 n2 = new Vector2(ty + middlePoint.X, -tx + middlePoint.Y);
 
                 //Vector2 n1 = new Vector2(dx + middlePoint.X, -dy + middlePoint.Y);
                 //Vector2 n2 = new Vector2(-dx + middlePoint.X, dy + middlePoint.Y);
@@ -201,6 +221,8 @@ namespace CSharpNation.Visualizer.Waves
                 //GlowPoints.Add(n1);
                 GlowPoints.Add(middlePoint);
                 GlowPoints.Add(n2);
+
+                Console.WriteLine("{0}) Distance: {1}", i, Vector2.Distance(middlePoint, n2));
             }
         }
 

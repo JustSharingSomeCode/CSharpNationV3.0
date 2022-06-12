@@ -64,30 +64,30 @@ namespace CSharpNation.Visualizer.Waves
 
 
 
-            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
-            {
-                GL.Color3(Color.FromArgb(255, R, G, B));
-                GL.Begin(PrimitiveType.Triangles);
+            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            //{
+            //    GL.Color3(Color.FromArgb(255, R, G, B));
+            //    GL.Begin(PrimitiveType.Triangles);
 
-                GL.Vertex2(CatmullRomPoints[j]);
-                GL.Vertex2(CatmullRomPoints[j + 1]);
-                GL.Vertex2(X, Y);
+            //    GL.Vertex2(CatmullRomPoints[j]);
+            //    GL.Vertex2(CatmullRomPoints[j + 1]);
+            //    GL.Vertex2(X, Y);
 
-                GL.End();
-            }
+            //    GL.End();
+            //}
 
 
-            for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
-            {
-                GL.Color3(Color.FromArgb(255, R, G, B));
-                GL.Begin(PrimitiveType.Triangles);
+            //for (int j = 0; j < CatmullRomPoints.Count - 1; j++)
+            //{
+            //    GL.Color3(Color.FromArgb(255, R, G, B));
+            //    GL.Begin(PrimitiveType.Triangles);
 
-                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
-                GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
-                GL.Vertex2(X, Y);
+            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
+            //    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
+            //    GL.Vertex2(X, Y);
 
-                GL.End();
-            }
+            //    GL.End();
+            //}
 
             if (EnableGlow)
             {
@@ -204,10 +204,13 @@ namespace CSharpNation.Visualizer.Waves
 
                 float size = 20;
 
-                Console.WriteLine("rx + ry = {0}", Math.Abs(rx) + Math.Abs(ry));
+                //Console.WriteLine("rx + ry = {0}", Math.Abs(rx) + Math.Abs(ry));
 
                 float tx = rx * size;
                 float ty = ry * size;
+
+                //Console.WriteLine("tx + ty: {0}", Math.Abs(tx) + Math.Abs(ty));
+                //Console.WriteLine("tx + ty: {0}", tx + ty);
 
                 //Vector2 n1 = new Vector2(-dy + middlePoint.X, dx + middlePoint.Y);
                 //Vector2 n2 = new Vector2(dy + middlePoint.X, -dx + middlePoint.Y);

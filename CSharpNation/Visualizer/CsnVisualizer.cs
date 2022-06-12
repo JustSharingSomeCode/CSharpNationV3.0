@@ -26,7 +26,7 @@ namespace CSharpNation.Visualizer
 
             Waves = new List<Wave>
             {
-                new Wave(255, 255, 255) { Quality = 0.5f},
+                new Wave(255, 255, 255) { Quality = 0.2f},
                 //new Wave(255, 255, 0),
                 //new Wave(255, 150, 0),
                 //new Wave(255, 0, 0),
@@ -189,7 +189,7 @@ namespace CSharpNation.Visualizer
             float logoSize = Logo.Size / 2.0f + Power;
             float x = Width / 2 + Rx;
             float y = Height / 2 + Ry;
-            Logo.DrawTexture(x - logoSize, y - logoSize, x + logoSize, y + logoSize, 255, 255, 255, 255);
+            //Logo.DrawTexture(x - logoSize, y - logoSize, x + logoSize, y + logoSize, 255, 255, 255, 255);
 
 
             Context.SwapBuffers();

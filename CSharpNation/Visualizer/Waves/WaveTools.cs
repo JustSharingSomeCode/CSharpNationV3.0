@@ -129,5 +129,17 @@ namespace CSharpNation.Visualizer.Waves
 
             return spectrum;
         }
+
+        public static List<float> Add(List<float> spectrum, float value)
+        {
+            float[] result = new float[spectrum.Count];
+
+            for(int i = 0; i < spectrum.Count; i++)
+            {
+                result[i] = spectrum[i] + value;
+            }
+
+            return result.ToList();
+        }
     }
 }

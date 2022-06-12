@@ -1,14 +1,77 @@
 ﻿<Page x:Class="CSharpNation.GUI.Pages.Waves"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:CSharpNation.GUI.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
       Title="Waves">
 
-    <Grid>
-        
+    <Grid Margin="18,0,18,18">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Expander IsExpanded="False"
+                      ExpandDirection="Down"
+                      VerticalAlignment="Top">
+                <Expander.Header>
+                    <Grid>
+                        <Label HorizontalAlignment="Left"
+                               Content="Glow"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <CheckBox x:Name="GlowCb" HorizontalAlignment="Right"/>
+                    </Grid>
+                </Expander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Size:"
+                           VerticalAlignment="Center" />
+                    <wpfui:NumberBox x:Name="SizeNb"
+                                     Grid.Column="2"
+                                     Height="30"
+                                     TextChanged="SizeNb_TextChanged" />
+
+                    <Label Grid.Row="1"
+                           Content="Max alpha:"
+                           VerticalAlignment="Center" />
+                    <wpfui:NumberBox x:Name="AlphaNb"
+                                     Grid.Row="1"
+                                     Grid.Column="2"
+                                     Height="30"
+                                     TextChanged="AlphaNb_TextChanged" />
+
+                    <Label Grid.Row="2"
+                           Content="Threshold:"
+                           VerticalAlignment="Center" />
+                    <wpfui:NumberBox x:Name="ThresholdNb"
+                                     Grid.Row="2"
+                                     Grid.Column="2"
+                                     Height="30"
+                                     TextChanged="ThresholdNb_TextChanged" />
+
+                </Grid>
+            </Expander>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+        </Grid>
     </Grid>
 </Page>

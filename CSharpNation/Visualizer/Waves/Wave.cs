@@ -35,7 +35,7 @@ namespace CSharpNation.Visualizer.Waves
         public List<Vector2> CatmullRomPoints { get; private set; } = new List<Vector2>();
 
 
-        public bool EnableGlow { get; set; } = true;
+        //public bool EnableGlow { get; set; } = true;
         public List<float> GlowSpectrum { get; set; }
         public List<Vector2> GlowCatmullRomPoints { get; private set; } = new List<Vector2>();
         private float Radius;
@@ -57,9 +57,9 @@ namespace CSharpNation.Visualizer.Waves
 
             UpdatePoints(X, Y, radius);
 
-            if (EnableGlow)
+            if (WavesConfig.EnableGlow)
             {
-                UpdateGlowPoints(X, Y, radius + 20);
+                UpdateGlowPoints(X, Y, radius + WavesConfig.GlowSize);
             }
         }
 
@@ -95,11 +95,13 @@ namespace CSharpNation.Visualizer.Waves
                 GL.End();
             }
 
-            if(EnableGlow)
+            if(WavesConfig.EnableGlow)
             {
                 for (int j = 0; j < GlowCatmullRomPoints.Count - 1; j++)
                 {
-                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + 20f)) / 40f, 0.0f, 1f) * 80f);
+                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + WavesConfig.GlowSize)) / WavesConfig.GlowThreshold, 0.0f, 1f) * WavesConfig.MaxGlowAlpha);
+
+                    alpha = WaveTools.Clamp(0, 255, alpha);
 
                     GL.Enable(EnableCap.Blend);
                     GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -132,7 +134,9 @@ namespace CSharpNation.Visualizer.Waves
 
                 for (int j = 0; j < GlowCatmullRomPoints.Count - 1; j++)
                 {
-                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + 20f)) / 40f, 0.0f, 1f) * 80f);
+                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + WavesConfig.GlowSize)) / WavesConfig.GlowThreshold, 0.0f, 1f) * WavesConfig.MaxGlowAlpha);
+
+                    alpha = WaveTools.Clamp(0, 255, alpha);
 
                     GL.Enable(EnableCap.Blend);
                     GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

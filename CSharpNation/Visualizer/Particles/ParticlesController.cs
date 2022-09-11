@@ -33,6 +33,8 @@ namespace CSharpNation.Visualizer.Particles
         public int Width { get; set; }
         public int Height { get; set; }
 
+        public float Ratio { get; set; }
+
         //public int MaxParticles { get; set; } = 500;
 
         private Random random;
@@ -42,8 +44,12 @@ namespace CSharpNation.Visualizer.Particles
 
         public void UpdateBoundaries(int width, int height)
         {
+            Particles.Clear();
+
             Width = width;
             Height = height;
+
+            Ratio = Height / 720f;
 
             X = width / 2;
             Y = height / 2;
@@ -54,7 +60,8 @@ namespace CSharpNation.Visualizer.Particles
             while (Particles.Count < ParticlesConfig.MaxParticles)
             {
                 //Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(150, 256)));
-                Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20) * (Height / 720f), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(150, 256)));
+                //Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20) * (Height / 720f), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(150, 256)));
+                Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20) * Ratio, random.NextDouble() <= 0.4f ? 1 : -1, random.Next(100, 256)));
             }
 
             for (int i = 0; i < Particles.Count; i++)

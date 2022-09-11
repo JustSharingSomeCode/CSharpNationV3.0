@@ -72,7 +72,7 @@ namespace CSharpNation.Visualizer.Analyzer
 
         private void CaptureDevice(int deviceIndex)
         {
-            Console.WriteLine(GetDevices()[deviceIndex]);
+            //Console.WriteLine(GetDevices()[deviceIndex]);
             int device = Convert.ToInt32(GetDevices()[deviceIndex].Split(' ')[0]);
 
             if (!BassWasapi.BASS_WASAPI_Init(device, 0, 0, BASSWASAPIInit.BASS_WASAPI_BUFFER, 1f, 0.05f, _process, IntPtr.Zero))
@@ -97,7 +97,7 @@ namespace CSharpNation.Visualizer.Analyzer
 
         public void ChangeDevice(int deviceIndex)
         {
-            if (deviceIndex != previousDevice && deviceIndex < GetDevices().Count)
+            if (deviceIndex != previousDevice && deviceIndex < GetDevices().Count && deviceIndex >= 0)
             {
                 Free();
 

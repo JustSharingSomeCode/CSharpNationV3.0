@@ -20,6 +20,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <Label Content="Texture path:"
@@ -40,8 +41,18 @@
                          Height="30"
                          TextChanged="BlurSigmaNb_TextChanged" />
 
+        <Label Grid.Row="2"
+               Content="Shake limiter:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="ShakeLimiterNb"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         Height="30"
+                         TextChanged="ShakeLimiterNb_TextChanged" />
+
         <wpfui:Button x:Name="SaveBtn"
-                      Grid.Row="2"
+                      Grid.Row="3"
                       Grid.ColumnSpan="3"
                       Height="30"
                       Icon="Save24"

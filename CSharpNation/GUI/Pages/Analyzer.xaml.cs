@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,34 @@ namespace CSharpNation.GUI.Pages
         public Analyzer()
         {
             InitializeComponent();
+
+            LinesNb.Value = AnalyzerConfig.Lines;
+
+            List<string> devices = AnalyzerConfig.SpectrumAnalyzer.GetDevices();
+
+            devices.Insert(0, "Default");
+
+            DeviceCb.ItemsSource = devices;
+        }
+
+        private void DeviceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DeviceCb.SelectedIndex == 0)
+            {
+                AnalyzerConfig.SpectrumAnalyzer.ChangeDevice(0);
+            }
+
+            AnalyzerConfig.SpectrumAnalyzer.ChangeDevice(DeviceCb.SelectedIndex - 1);
+        }
+
+        private void LinesNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AnalyzerConfig.Lines = (int)LinesNb.Value;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

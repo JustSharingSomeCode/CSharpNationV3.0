@@ -27,6 +27,7 @@ namespace CSharpNation.GUI.Pages
 
             TexturePathTxt.Text = LogoConfig.TexturePath;
             BlurSigmaNb.Value = LogoConfig.BlurSigma;
+            ShakeLimiterNb.Value = LogoConfig.ShakeLimiter;
         }
 
         private void TexturePathTxt_KeyUp(object sender, KeyEventArgs e)
@@ -40,6 +41,11 @@ namespace CSharpNation.GUI.Pages
         private void BlurSigmaNb_TextChanged(object sender, TextChangedEventArgs e)
         {
             LogoConfig.BlurSigma = (float)BlurSigmaNb.Value;
+        }
+
+        private void ShakeLimiterNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LogoConfig.ShakeLimiter = (float)ShakeLimiterNb.Value;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)

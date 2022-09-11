@@ -23,6 +23,7 @@ namespace CSharpNation.Visualizer.Config
 
         public static string TexturePath { get; set; } = ConfigInit.ResourcesDirectoryPath + @"\Logo.png";
         public static float BlurSigma { get; set; } = 0;
+        public static float ShakeLimiter { get; set; } = 10;
 
         private static string[] config;
 
@@ -39,16 +40,19 @@ namespace CSharpNation.Visualizer.Config
 
             string path = ConfigInit.SearchConfig(config, "TexturePath");
             string blur = ConfigInit.SearchConfig(config, "BlurSigma");
+            string shake = ConfigInit.SearchConfig(config, "ShakeLimiter");
 
             TexturePath = (path == null || path == "") ? ConfigInit.ResourcesDirectoryPath + @"\Logo.png" : path;
             BlurSigma = blur == null ? 0 : float.Parse(blur);
+            ShakeLimiter = shake == null ? 10 : float.Parse(shake);
         }
 
         public static void SaveConfig()
         {
-            config = new string[2];
+            config = new string[3];
             config[0] = "TexturePath=" + TexturePath;
             config[1] = "BlurSigma=" + BlurSigma;
+            config[2] = "ShakeLimiter=" + ShakeLimiter;
 
             File.WriteAllLines(ConfigInit.LogoConfigPath, config);
         }

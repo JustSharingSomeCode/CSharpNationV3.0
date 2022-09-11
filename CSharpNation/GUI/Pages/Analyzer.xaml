@@ -23,7 +23,7 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <Label Content="Lines:"
+        <Label Content="Lines (requires restart):"
                VerticalAlignment="Center"
                HorizontalAlignment="Left" />
         <wpfui:NumberBox x:Name="LinesNb"

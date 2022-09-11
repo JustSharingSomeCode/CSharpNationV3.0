@@ -12,7 +12,8 @@ namespace CSharpNation.Visualizer.Config
     {
         public static void Initialize()
         {
-            Lines = 50;
+            LoadConfig();
+            //Lines = 50;
 
             SpectrumAnalyzer = new SpectrumAnalyzer() { _lines = Lines };
         }

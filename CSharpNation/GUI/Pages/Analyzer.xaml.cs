@@ -51,7 +51,7 @@ namespace CSharpNation.GUI.Pages
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AnalyzerConfig.SaveConfig();
         }
     }
 }

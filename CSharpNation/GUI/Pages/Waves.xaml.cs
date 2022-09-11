@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,37 @@ namespace CSharpNation.GUI.Pages
         public Waves()
         {
             InitializeComponent();
+
+            SizeNb.Value = WavesConfig.GlowSize;
+            AlphaNb.Value = WavesConfig.MaxGlowAlpha;
+            ThresholdNb.Value = WavesConfig.GlowThreshold;
+
+            GlowCb.IsChecked = WavesConfig.EnableGlow;
+
+            GlowCb.Checked += (sender, args) =>
+            {
+                WavesConfig.EnableGlow = true;
+            };
+
+            GlowCb.Unchecked += (sender, args) =>
+            {
+                WavesConfig.EnableGlow = false;
+            };
+        }       
+
+        private void SizeNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WavesConfig.GlowSize = (float)SizeNb.Value;
+        }
+
+        private void AlphaNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WavesConfig.MaxGlowAlpha = (float)AlphaNb.Value;
+        }
+
+        private void ThresholdNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WavesConfig.GlowThreshold = (float)ThresholdNb.Value;
         }
     }
 }

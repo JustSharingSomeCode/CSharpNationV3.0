@@ -24,7 +24,7 @@ namespace CSharpNation.Visualizer.Waves
         public int G { get; set; }
         public int B { get; set; }
 
-        public List<float> Spectrum { get; set; }
+        public List<float> Spectrum { get; set; }        
         public List<float> PreviousSpectrum { get; set; }
 
         public double Quality { get; set; } = 0.1;
@@ -33,6 +33,12 @@ namespace CSharpNation.Visualizer.Waves
         private float Y { get; set; }
 
         public List<Vector2> CatmullRomPoints { get; private set; } = new List<Vector2>();
+
+
+        //public bool EnableGlow { get; set; } = true;
+        public List<float> GlowSpectrum { get; set; }
+        public List<Vector2> GlowCatmullRomPoints { get; private set; } = new List<Vector2>();
+        private float Radius;
 
         public void Update(List<float> spectrum, float x, float y, float radius)
         {
@@ -44,11 +50,17 @@ namespace CSharpNation.Visualizer.Waves
             X = x;
             Y = y;
 
+            Radius = radius;
             PreviousSpectrum = Spectrum;
             Spectrum = WaveTools.SmoothWave(spectrum, PreviousSpectrum, 0.5f);
             Spectrum = WaveTools.NanToZero(Spectrum);
 
             UpdatePoints(X, Y, radius);
+
+            if (WavesConfig.EnableGlow)
+            {
+                UpdateGlowPoints(X, Y, radius + WavesConfig.GlowSize);
+            }
         }
 
         public void Draw(bool debug = false)
@@ -83,6 +95,78 @@ namespace CSharpNation.Visualizer.Waves
                 GL.End();
             }
 
+            if(WavesConfig.EnableGlow)
+            {
+                for (int j = 0; j < GlowCatmullRomPoints.Count - 1; j++)
+                {
+                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + WavesConfig.GlowSize)) / WavesConfig.GlowThreshold, 0.0f, 1f) * WavesConfig.MaxGlowAlpha);
+
+                    alpha = WaveTools.Clamp(0, 255, alpha);
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    GL.Color4(Color.FromArgb(alpha, R, G, B));
+                    GL.Vertex2(CatmullRomPoints[j]);
+
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(GlowCatmullRomPoints[j]);
+                    GL.Vertex2(GlowCatmullRomPoints[j + 1]);
+
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    GL.Color4(Color.FromArgb(alpha, R, G, B));
+                    GL.Vertex2(CatmullRomPoints[j]);
+                    GL.Vertex2(CatmullRomPoints[j + 1]);
+
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(GlowCatmullRomPoints[j + 1]);
+
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+                }
+
+                for (int j = 0; j < GlowCatmullRomPoints.Count - 1; j++)
+                {
+                    int alpha = (int)(WaveTools.Clamp((Vector2.Distance(new Vector2(X, Y), GlowCatmullRomPoints[j]) - (Radius + WavesConfig.GlowSize)) / WavesConfig.GlowThreshold, 0.0f, 1f) * WavesConfig.MaxGlowAlpha);
+
+                    alpha = WaveTools.Clamp(0, 255, alpha);
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    GL.Color4(Color.FromArgb(alpha, R, G, B));
+                    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
+
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(MirrorPosition(X, GlowCatmullRomPoints[j]), GlowCatmullRomPoints[j].Y);
+                    GL.Vertex2(MirrorPosition(X, GlowCatmullRomPoints[j + 1]), GlowCatmullRomPoints[j + 1].Y);
+
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+
+                    GL.Enable(EnableCap.Blend);
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    GL.Begin(PrimitiveType.Triangles);
+
+                    GL.Color4(Color.FromArgb(alpha, R, G, B));
+                    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j]), CatmullRomPoints[j].Y);
+                    GL.Vertex2(MirrorPosition(X, CatmullRomPoints[j + 1]), CatmullRomPoints[j + 1].Y);
+
+                    GL.Color4(Color.FromArgb(0, R, G, B));
+                    GL.Vertex2(MirrorPosition(X, GlowCatmullRomPoints[j + 1]), GlowCatmullRomPoints[j + 1].Y);
+
+                    GL.End();
+                    GL.Disable(EnableCap.Blend);
+                }
+            }
 
             if (debug)
             {
@@ -124,7 +208,32 @@ namespace CSharpNation.Visualizer.Waves
             }
         }
 
+        private void UpdateGlowPoints(float x, float y, float circleRadius)
+        {
+            if (Spectrum == null)
+            {
+                return;
+            }
 
+            GlowCatmullRomPoints.Clear();
+
+            Vector2 p1, p2, p3, p4;
+
+            for (int i = 0; i < Spectrum.Count - 1; i++)
+            {
+                p1 = GetPosition(x, y, WaveTools.Clamp(0, Spectrum.Count, i - 1), circleRadius);
+
+                p2 = GetPosition(x, y, i, circleRadius);
+                p3 = GetPosition(x, y, i + 1, circleRadius);
+
+                p4 = GetPosition(x, y, WaveTools.Clamp(0, Spectrum.Count - 1, i + 2), circleRadius);
+
+                for (double j = 0; j <= 1; j += Quality)
+                {
+                    GlowCatmullRomPoints.Add(CatmullRom((float)j, p1, p2, p3, p4));
+                }
+            }
+        }
 
         private Vector2 GetPosition(float x, float y, int i, float circleRadius)
         {

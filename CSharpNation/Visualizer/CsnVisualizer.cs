@@ -163,7 +163,7 @@ namespace CSharpNation.Visualizer
             }
 
             //float pw = WaveTools.Clamp(Power - (0.015f * Height), 0.0f, float.MaxValue); //ajustar
-            float pw = WaveTools.Clamp(Power - (15 * (Height / 720f)), 0.0f, float.MaxValue); //ajustar
+            float pw = WaveTools.Clamp(Power - (10 * (Height / 720f)), 0.0f, float.MaxValue); //ajustar
 
             Rx = (float)random.NextDouble() * (pw * 0.5f) * Dx;
             Ry = (float)random.NextDouble() * (pw * 0.5f) * Dy;

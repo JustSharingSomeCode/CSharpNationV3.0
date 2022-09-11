@@ -31,10 +31,10 @@ namespace CSharpNation.Visualizer.Particles
         }
 
         public float X { get; set; }
-        public float xSpeed { get; set; }
+        public float xSpeed { get; set; } // 0 to 1
 
         public float Y { get; set; }
-        public float ySpeed { get; set; }
+        public float ySpeed { get; set; } // 0 to 1
 
         public float Size { get; set; }
         public float HalfSize { get; set; }
@@ -43,11 +43,21 @@ namespace CSharpNation.Visualizer.Particles
 
         public int Opacity { get; set; }
 
+        public float SinAngle { get; set; } = 0;
+
         public void Update(float multiplier)
         {
             if (multiplier < 1)
             {
                 multiplier = 1;
+            }
+
+            //0.02f = adjusts frequency
+            SinAngle += xSpeed * 0.02f * multiplier;
+
+            if(SinAngle >= 360)
+            {
+                SinAngle = 0;
             }
 
             X += xSpeed * multiplier;

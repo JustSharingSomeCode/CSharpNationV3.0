@@ -96,15 +96,20 @@ namespace CSharpNation.Visualizer.Particles
 
             Particle p;
             float dist;
+            float sinWave;
 
             for (int i = 0; i < Particles.Count; i++)
             {
                 p = Particles[i];
-                texture.DrawTexture(p.X - p.HalfSize, p.Y - p.HalfSize, p.X + p.HalfSize, p.Y + p.HalfSize, p.Opacity, 255, 255, 255);
+
+                //8 = adjusts amplitude
+                sinWave = (float)Math.Sin(p.SinAngle) * 8;
+
+                texture.DrawTexture(p.X - p.HalfSize, p.Y + sinWave - p.HalfSize, p.X + p.HalfSize, p.Y + sinWave + p.HalfSize, p.Opacity, 255, 255, 255);
 
                 dist = p.X - X;
 
-                texture.DrawTexture(X - dist - p.HalfSize, p.Y - p.HalfSize, X - dist + p.HalfSize, p.Y + p.HalfSize, p.Opacity, 255, 255, 255);
+                texture.DrawTexture(X - dist - p.HalfSize, p.Y + sinWave - p.HalfSize, X - dist + p.HalfSize, p.Y + sinWave + p.HalfSize, p.Opacity, 255, 255, 255);
             }
         }
 

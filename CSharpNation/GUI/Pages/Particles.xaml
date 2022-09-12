@@ -23,6 +23,10 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <Label Content="Texture path:"
@@ -51,8 +55,28 @@
                          Height="30" 
                          TextChanged="BlurSigmaNb_TextChanged"/>
 
+        <Label Grid.Row="3"
+               Content="Wave frequency:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="WaveFrequencyNb"
+                         Grid.Row="3"
+                         Grid.Column="2"
+                         Height="30"
+                         TextChanged="WaveFrequencyNb_TextChanged" />
+
+        <Label Grid.Row="4"
+               Content="Wave amplitude:"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <wpfui:NumberBox x:Name="WaveAmplitudeNb"
+                         Grid.Row="4"
+                         Grid.Column="2"
+                         Height="30"
+                         TextChanged="WaveAmplitudeNb_TextChanged" />
+
         <wpfui:Button x:Name="SaveBtn"
-                      Grid.Row="3"
+                      Grid.Row="5"
                       Grid.ColumnSpan="3"
                       Height="30"
                       Icon="Save24"

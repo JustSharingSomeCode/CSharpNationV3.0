@@ -103,7 +103,8 @@ namespace CSharpNation.Visualizer.Particles
                 p = Particles[i];
 
                 //8 = adjusts amplitude
-                sinWave = (float)Math.Sin(p.SinAngle) * 8;
+                //sinWave = (float)Math.Sin(p.SinAngle) * 8;
+                sinWave = (float)Math.Sin(p.SinAngle) * ParticlesConfig.WaveAmplitude;
 
                 texture.DrawTexture(p.X - p.HalfSize, p.Y + sinWave - p.HalfSize, p.X + p.HalfSize, p.Y + sinWave + p.HalfSize, p.Opacity, 255, 255, 255);
 

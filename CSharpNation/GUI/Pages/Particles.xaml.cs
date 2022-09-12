@@ -28,6 +28,8 @@ namespace CSharpNation.GUI.Pages
             TexturePathTxt.Text = ParticlesConfig.TexturePath;
             MaxParticlesNb.Value = ParticlesConfig.MaxParticles;
             BlurSigmaNb.Value = ParticlesConfig.BlurSigma;
+            WaveFrequencyNb.Value = ParticlesConfig.WaveFrequency;
+            WaveAmplitudeNb.Value = ParticlesConfig.WaveAmplitude;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -51,6 +53,16 @@ namespace CSharpNation.GUI.Pages
         private void BlurSigmaNb_TextChanged(object sender, TextChangedEventArgs e)
         {
             ParticlesConfig.BlurSigma = (float)BlurSigmaNb.Value;
+        }
+
+        private void WaveFrequencyNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParticlesConfig.WaveFrequency = (float)WaveFrequencyNb.Value;
+        }
+
+        private void WaveAmplitudeNb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParticlesConfig.WaveAmplitude = (float)WaveAmplitudeNb.Value;
         }
     }
 }

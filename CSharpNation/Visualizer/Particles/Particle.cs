@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharpNation.Visualizer.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,9 +54,10 @@ namespace CSharpNation.Visualizer.Particles
             }
 
             //0.02f = adjusts frequency
-            SinAngle += xSpeed * 0.02f * multiplier;
+            //SinAngle += xSpeed * 0.02f * multiplier;
+            SinAngle += xSpeed * ParticlesConfig.WaveFrequency * multiplier;
 
-            if(SinAngle >= 360)
+            if (SinAngle >= 360)
             {
                 SinAngle = 0;
             }

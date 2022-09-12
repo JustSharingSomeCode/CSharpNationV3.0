@@ -104,6 +104,8 @@ namespace CSharpNation.Visualizer
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            //Console.WriteLine("UPDATE FPS: " + (1f / e.Time).ToString("0."));
+
             List<float> actualSpectrum = WaveTools.FixDiscontinuities(Analyzer.GetSpectrum());
             actualSpectrum = WaveTools.AvgWave(actualSpectrum, 1);
             actualSpectrum = WaveTools.NanToZero(actualSpectrum);
@@ -173,6 +175,8 @@ namespace CSharpNation.Visualizer
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
+            Title = "CSharpNation (Vsync: " + VSync.ToString() + ") " + "  FPS: " + (1f / e.Time).ToString("0.");
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             int opacity = (int)(BackgroundsConfig.Opacity / 100.0f * 255);

@@ -61,7 +61,7 @@ namespace CSharpNation.Visualizer.Particles
             {
                 //Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(150, 256)));
                 //Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20) * (Height / 720f), random.NextDouble() <= 0.4f ? 1 : -1, random.Next(150, 256)));
-                Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), random.Next(5, 20) * Ratio, random.NextDouble() <= 0.4f ? 1 : -1, random.Next(100, 256)));
+                Particles.Add(new Particle(X, Y, (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble() * 180f, random.Next(5, 20) * Ratio, random.NextDouble() <= 0.4f ? 1 : -1, random.Next(100, 256)));
             }
 
             for (int i = 0; i < Particles.Count; i++)
@@ -96,7 +96,6 @@ namespace CSharpNation.Visualizer.Particles
 
             Particle p;
             float dist;
-            float sinWave;
 
             for (int i = 0; i < Particles.Count; i++)
             {
@@ -104,13 +103,13 @@ namespace CSharpNation.Visualizer.Particles
 
                 //8 = adjusts amplitude
                 //sinWave = (float)Math.Sin(p.SinAngle) * 8;
-                sinWave = (float)Math.Sin(p.SinAngle) * ParticlesConfig.WaveAmplitude;
+                //sinWave = (float)Math.Sin(p.SinAngle) * ParticlesConfig.WaveAmplitude;
 
-                texture.DrawTexture(p.X - p.HalfSize, p.Y + sinWave - p.HalfSize, p.X + p.HalfSize, p.Y + sinWave + p.HalfSize, p.Opacity, 255, 255, 255);
+                texture.DrawTexture(p.X - p.HalfSize, p.Y - p.HalfSize, p.X + p.HalfSize, p.Y + p.HalfSize, p.Opacity, 255, 255, 255);
 
                 dist = p.X - X;
 
-                texture.DrawTexture(X - dist - p.HalfSize, p.Y + sinWave - p.HalfSize, X - dist + p.HalfSize, p.Y + sinWave + p.HalfSize, p.Opacity, 255, 255, 255);
+                texture.DrawTexture(X - dist - p.HalfSize, p.Y - p.HalfSize, X - dist + p.HalfSize, p.Y + p.HalfSize, p.Opacity, 255, 255, 255);
             }
         }
 

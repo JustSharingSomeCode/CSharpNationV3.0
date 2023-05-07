@@ -9,16 +9,17 @@ namespace CSharpNation.Visualizer.Particles
 {
     public class Particle
     {
-        public Particle(float x, float y, float speedX, float speedY, float size, int dirY, int opacity)
+        public Particle(float x, float y, float speedX, float speedY, float waveInit, float size, int dirY, int opacity)
         {
-            X = x;
-            Y = y;
+            _x = x;
+            _y = y;
 
             if (speedX <= 0.05f && speedY <= 0.05f)
             {
                 speedX = 0.2f;
             }
 
+            SinAngle = waveInit;
 
             xSpeed = speedX;
             ySpeed = speedY;
@@ -30,6 +31,8 @@ namespace CSharpNation.Visualizer.Particles
 
             Opacity = opacity;
         }
+
+        private float _x, _y;
 
         public float X { get; set; }
         public float xSpeed { get; set; } // 0 to 1
@@ -45,6 +48,8 @@ namespace CSharpNation.Visualizer.Particles
         public int Opacity { get; set; }
 
         public float SinAngle { get; set; } = 0;
+
+        private float sinWave;
 
         public void Update(float multiplier)
         {
@@ -62,8 +67,14 @@ namespace CSharpNation.Visualizer.Particles
                 SinAngle = 0;
             }
 
-            X += xSpeed * multiplier;
-            Y += ySpeed * multiplier * yDir;
+            _x += xSpeed * multiplier;
+            _y += ySpeed * multiplier * yDir;
+
+
+            X = _x;
+            //Y += ySpeed * multiplier * yDir;
+            sinWave = (float)Math.Sin(SinAngle) * ParticlesConfig.WaveAmplitude;
+            Y = _y + sinWave;
         }
     }
 }
